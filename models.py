@@ -22,7 +22,10 @@ class Answer(models.Model):
     text = models.TextField(_(u'Respuesta'))
 
     def __unicode__(self):
-        return self.text
+        if len(self.text) > 50:
+            return '%s...' % self.text[0:50]
+        else:
+            return self.text
 
     class Admin:
         pass
@@ -53,9 +56,10 @@ class Question(models.Model):
     def get_answer(self):
         from django.contrib.markup.templatetags.markup import textile
         if self.answer:
-            return self.answer.text
+            return textile(self.answer.text)
         if self.page:
             return textile(self.page.content)
+    answer_text=property(get_answer)
 
     class Admin:
         pass

@@ -51,7 +51,7 @@ class AnswerNode(Node):
             html += '<h3 class="faq-title">%s</h3>' % subject
             for question in subject.questions.all():
                 html += '<h4 class="faq-question" id="%(id)s">%(title)s</h4>' % { 'id': slugify(question.text), 'title': question }
-                html += '<p class="faq-answer">%s</p>' % question.answer
+                html += '<p class="faq-answer">%s</p>' % question.answer_text
         return html
 
 def render_subject(parser, token):
