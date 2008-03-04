@@ -15,6 +15,9 @@ class Subject(models.Model):
     def __unicode__(self):
         return self.name
 
+    class Meta:
+        ordering = ['position', 'name']
+
     class Admin:
         pass
 
@@ -60,6 +63,9 @@ class Question(models.Model):
         if self.page:
             return textile(self.page.content)
     answer_text=property(get_answer)
+
+    class Meta:
+        ordering = ['position']
 
     class Admin:
         pass
