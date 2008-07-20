@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.sites.models import Site
 from django.contrib.flatpages.models import FlatPage
+from django.contrib import admin
 
 # Create your models here.
 class Subject(models.Model):
@@ -76,3 +77,4 @@ class Question(models.Model):
     class Admin:
         pass
 
+admin.site.register(Subject, Answer, Question)
