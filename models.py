@@ -7,7 +7,7 @@ from django.contrib.flatpages.models import FlatPage
 # Create your models here.
 class Subject(models.Model):
     name = models.CharField(_(u'Nombre'), max_length=255)
-    slug = models.SlugField(max_length=255)
+    slug = models.SlugField(max_length=255, blank=True, null=True)
     position = models.PositiveIntegerField(_(u'Posición'), default=1)
     inline = models.BooleanField(_(u'¿Mostrar las preguntas y respuestas en la misma página?'))
     site = models.ForeignKey(Site)
@@ -16,8 +16,9 @@ class Subject(models.Model):
         return self.name
 
     def save(self):
-        from django.template.defaultfilters import slugify
-        self.slug = slugify(self.name)
+        if not self.slug:
+            from django.template.defaultfilters import slugify
+            self.slug = slugify(self.name)
         super(Subject, self).save()
 
     class Meta:
