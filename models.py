@@ -77,4 +77,6 @@ class Question(models.Model):
     class Admin:
         pass
 
-admin.site.register(Subject, Answer, Question)
+admin.site.register(Subject)
+admin.site.register(Answer)
+admin.site.register(Question)
